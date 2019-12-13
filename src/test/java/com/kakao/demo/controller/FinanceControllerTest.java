@@ -8,7 +8,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FinanceControllerTest {
     @Autowired
-    WebTestClient webTestClient;
+    private WebTestClient webTestClient;
 
     @Test
     void findFinanceStatus() {

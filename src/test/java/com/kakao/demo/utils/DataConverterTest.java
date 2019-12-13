@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DataConverterTest {
+
     @Test
     @DisplayName("단위 없애는 테스트")
     void deleteBenchMark() {

@@ -13,10 +13,9 @@ import java.util.List;
 
 @Service
 public class FinanceService {
-    private static final int COLUMN_NAME_INDEX = 0;
     public static final int YEAR_INDEX = 0;
     public static final int MONTH_INDEX = 1;
-
+    private static final int COLUMN_NAME_INDEX = 0;
     private final InstitutionService institutionService;
     private final AmountRepository amountRepository;
 

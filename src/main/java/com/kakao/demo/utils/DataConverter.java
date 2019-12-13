@@ -8,10 +8,11 @@ public class DataConverter {
     private static final String THOUSAND_SEPARATOR = ",";
     private static final String BLANK = "";
 
+    // TODO: 13/12/2019 replace 2번하지 않고 파싱하는 작업 필요
     public static List<String> deleteBenchMark(List<String> institutions) {
         return institutions.stream()
-                .map(name -> name.replaceAll("\\(억원\\)",""))
-                .map(name -> name.replaceAll("1\\)",""))
+                .map(name -> name.replaceAll("\\(억원\\)", ""))
+                .map(name -> name.replaceAll("1\\)", ""))
                 .collect(Collectors.toList());
     }
 
