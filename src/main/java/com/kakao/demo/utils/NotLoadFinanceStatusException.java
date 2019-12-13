@@ -1,7 +1,7 @@
-package com.kakao.demo.service;
+package com.kakao.demo.utils;
 
 public class NotLoadFinanceStatusException extends RuntimeException {
-    public NotLoadFinanceStatusException(Throwable cause) {
+    public NotLoadFinanceStatusException(Exception cause) {
         super(cause);
     }
 }

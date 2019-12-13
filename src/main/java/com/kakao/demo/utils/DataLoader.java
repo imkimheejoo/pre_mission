@@ -1,6 +1,5 @@
 package com.kakao.demo.utils;
 
-import com.kakao.demo.service.NotLoadFinanceStatusException;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.core.io.ClassPathResource;

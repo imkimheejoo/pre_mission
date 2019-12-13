@@ -31,7 +31,7 @@ public class InstitutionService {
         List<InstitutionDto> institutionDtos = new ArrayList<>();
         // TODO: 13/12/2019 데이터 가공 로직이 너무 많음,,,,,,,,
         List<String> validData = DataConverter.deleteEmptyValue(institutionNames);
-        List<String> institutions = DataConverter.deleteBenchMark(DataConverter.extractInstitutionNames(validData));
+        List<String> institutions = DataConverter.deleteBenchMark(DataConverter.extractInstitutionValues(validData));
 
         for (String institution : institutions) {
             save(institution);

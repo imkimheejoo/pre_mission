@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class DataConverter {
     private static final int INSTITUTION_START_INDEX = 2;
+    private static final String THOUSAND_SEPARATOR = ",";
+    private static final String BLANK = "";
 
     public static List<String> deleteBenchMark(List<String> institutions) {
         return institutions.stream()
@@ -19,8 +21,13 @@ public class DataConverter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> extractInstitutionNames(List<String> institutionNames) {
+    public static List<String> extractInstitutionValues(List<String> institutionNames) {
         return institutionNames.subList(INSTITUTION_START_INDEX, institutionNames.size());
     }
 
+    public static List<Integer> convertInputToRealResult(List<String> financeStatusByDate) {
+        return financeStatusByDate.stream()
+                .map(result -> result.replaceAll(THOUSAND_SEPARATOR, BLANK))
+                .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+    }
 }

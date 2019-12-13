@@ -1,7 +1,7 @@
 package com.kakao.demo.controller;
 
-import com.kakao.demo.domain.FinanceStatus;
 import com.kakao.demo.service.FinanceService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +13,10 @@ public class FinanceController {
         this.financeService = financeService;
     }
 
-    @GetMapping("/load/csv")
-    public FinanceStatus findFinanceStatus() {
-        return financeService.loadFinanceStatus();
+    @GetMapping("/api/load")
+    public ResponseEntity findFinanceStatus() {
+        financeService.saveInputFile();
+        return ResponseEntity.ok().build();
     }
 
 }
