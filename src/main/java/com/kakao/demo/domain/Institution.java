@@ -2,21 +2,33 @@ package com.kakao.demo.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class Institution {
+    private static final String INSTITUTION_CODE_PREFIX = "bnk_";
+    private static AtomicInteger atomicInteger = new AtomicInteger();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
+
+    @Column(unique = true, nullable = false)
+    private String code;
 
     protected Institution() {
     }
 
-    public Institution(String name) {
+    private Institution(String name, String code) {
         this.name = name;
+        this.code = code;
+    }
+
+    public static Institution of(String name) {
+        return new Institution(name, INSTITUTION_CODE_PREFIX + atomicInteger.getAndIncrement());
     }
 
     @Override

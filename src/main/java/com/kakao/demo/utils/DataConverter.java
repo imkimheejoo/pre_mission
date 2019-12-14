@@ -3,12 +3,10 @@ package com.kakao.demo.utils;
 import com.kakao.demo.service.dto.Measures;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataConverter {
-    private static final int RESULT_INDEX = 1;
     private static final int INSTITUTION_START_INDEX = 2;
     private static final String THOUSAND_SEPARATOR = ",";
     private static final String BLANK = "";
@@ -21,18 +19,17 @@ public class DataConverter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> deleteEmptyValue(List<String> values) {
+    private static List<String> deleteEmptyValue(List<String> values) {
         return values.stream()
                 .filter(name -> !name.isEmpty())
                 .collect(Collectors.toList());
     }
 
-    public static List<String> extractColumnNames(List<String[]> inputData) {
-        return deleteEmptyValue(Arrays.asList(inputData.get(0)));
-    }
-
     public static List<String> extractInstitutionNames(List<String> institutionNames) {
-        return deleteBenchMark(deleteEmptyValue(institutionNames.subList(INSTITUTION_START_INDEX, institutionNames.size())));
+        List<String> filteredInstitutions = institutionNames.subList(INSTITUTION_START_INDEX, institutionNames.size());
+        List<String> realInstitutions = deleteEmptyValue(filteredInstitutions);
+
+        return deleteBenchMark(realInstitutions);
     }
 
     public static List<Integer> convertStringToInt(List<String> financeStatusByDate) {
@@ -40,13 +37,12 @@ public class DataConverter {
                 .map(result -> result.replaceAll(THOUSAND_SEPARATOR, BLANK))
                 .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
     }
-    // TODO: 14/12/2019
 
     public static List<Measures> extractMeasures(List<String[]> inputData) {
         List<Measures> measures = new ArrayList<>();
 
-        for (int i = RESULT_INDEX; i < inputData.size(); i++) {
-            Measures measureByDate = Measures.valueOf(inputData.get(i));
+        for (String[] input : inputData) {
+            Measures measureByDate = Measures.valueOf(input);
             measures.add(measureByDate);
         }
         return measures;

@@ -18,8 +18,9 @@ public class InstitutionService {
         this.institutionRepository = institutionRepository;
     }
 
+    @Transactional
     public void save(String institutionName) {
-        Institution institution = new Institution(institutionName);
+        Institution institution = Institution.of(institutionName);
         institutionRepository.save(institution);
     }
 
