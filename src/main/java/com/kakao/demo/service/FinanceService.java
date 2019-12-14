@@ -54,7 +54,8 @@ public class FinanceService {
         List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(institutionNames);
 
         //측정값 저장
-        List<Measures> measures = DataConverter.extractMeasures(inputData);
+
+        List<Measures> measures = DataConverter.extractMeasures(inputData.subList(1, inputData.size()));
         save(measures, institutionDtos);
     }
 }
