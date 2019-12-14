@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InstitutionService {
@@ -38,5 +39,13 @@ public class InstitutionService {
             institutionDtos.add(new InstitutionDto(institution));
         }
         return institutionDtos;
+    }
+
+    public List<InstitutionDto> findInstitutions() {
+        List<Institution> institutions = institutionRepository.findAll();
+
+        return institutions.stream()
+                .map(institution -> new InstitutionDto(institution.getName()))
+                .collect(Collectors.toList());
     }
 }

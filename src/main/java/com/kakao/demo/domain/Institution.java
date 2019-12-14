@@ -31,6 +31,14 @@ public class Institution {
         return new Institution(name, INSTITUTION_CODE_PREFIX + atomicInteger.getAndIncrement());
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
