@@ -1,4 +1,4 @@
-package com.kakao.demo.service;
+package com.kakao.demo.service.dto;
 
 import java.util.Objects;
 

@@ -1,6 +1,7 @@
 package com.kakao.demo.service;
 
 import com.kakao.demo.domain.InstitutionRepository;
+import com.kakao.demo.service.dto.InstitutionDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

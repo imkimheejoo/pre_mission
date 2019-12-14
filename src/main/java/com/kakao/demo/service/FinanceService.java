@@ -4,18 +4,20 @@ import com.kakao.demo.domain.AmountRepository;
 import com.kakao.demo.domain.FinanceAmount;
 import com.kakao.demo.domain.FinanceDate;
 import com.kakao.demo.domain.Institution;
+import com.kakao.demo.service.dto.InstitutionDto;
+import com.kakao.demo.service.dto.Measures;
 import com.kakao.demo.utils.DataConverter;
 import com.kakao.demo.utils.DataLoader;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FinanceService {
-    public static final int YEAR_INDEX = 0;
-    public static final int MONTH_INDEX = 1;
-    private static final int COLUMN_NAME_INDEX = 0;
+    private static final int COLUMN_INDEX = 0;
+
     private final InstitutionService institutionService;
     private final AmountRepository amountRepository;
 
@@ -24,33 +26,36 @@ public class FinanceService {
         this.amountRepository = amountRepository;
     }
 
-    private void create(List<String> financeStatusByDate, List<InstitutionDto> institutionDtos) {
-        FinanceDate financeDate = new FinanceDate(financeStatusByDate.get(YEAR_INDEX), financeStatusByDate.get(MONTH_INDEX));
+    private void save(List<Measures> measuresByDate, List<InstitutionDto> institutionDtos) {
+        for (Measures measures : measuresByDate) {
+            saveByDate(measures, institutionDtos);
+        }
+    }
 
-        // TODO: 13/12/2019 데이터 가공로직 많다,,,
-        List<String> financeStatus = DataConverter.extractInstitutionValues(financeStatusByDate);
-        List<Integer> financeOfInstitution =
-                DataConverter.convertInputToRealResult(financeStatus);
+    private void saveByDate(Measures financeStatusByDate, List<InstitutionDto> institutionDtos) {
+        FinanceDate financeDate = FinanceDate.of(financeStatusByDate.getYear(), financeStatusByDate.getMonth());
 
-        for (int i = 0; i < financeOfInstitution.size(); i++) {
-            Institution institution = institutionService.findByName(institutionDtos.get(i).getName());
-            int money = financeOfInstitution.get(i);
+        for (int i = 0; i < institutionDtos.size(); i++) {
+            String institutionName = institutionDtos.get(i).getName();
+            Institution institution = institutionService.findByName(institutionName);
+
+            int money = financeStatusByDate.getMeasure(i);
             FinanceAmount financeAmount = new FinanceAmount(money, financeDate, institution);
             amountRepository.save(financeAmount);
         }
     }
 
-    public void saveInputFile() {
+    public void loadCsvFile() {
         List<String[]> inputData = DataLoader.loadCsvFile();
-        //은행 정보 저장
-        List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(
-                Arrays.asList(inputData.get(COLUMN_NAME_INDEX)));
 
-        //Amount 저장
-        for (int i = 1; i < inputData.size(); i++) {
-            List<String> data = DataConverter.deleteEmptyValue(Arrays.asList(inputData.get(i)));
-            create(data, institutionDtos);
-        }
+        //기관 저장
+        List<String> firstRows = Arrays.stream(inputData.get(COLUMN_INDEX)).collect(Collectors.toList());
+        List<String> institutionNames = DataConverter.extractInstitutionNames(firstRows);
+        List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(institutionNames);
+
+        //측정값 저장
+        List<Measures> measures = DataConverter.extractMeasures(inputData);
+        save(measures, institutionDtos);
     }
 }
 

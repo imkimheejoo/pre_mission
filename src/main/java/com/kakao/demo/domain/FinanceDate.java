@@ -5,15 +5,19 @@ import java.util.Objects;
 
 @Embeddable
 public class FinanceDate {
-    private String year;
-    private String month;
+    private int year;
+    private int month;
 
     protected FinanceDate() {
     }
 
-    public FinanceDate(String year, String month) {
+    private FinanceDate(int year, int month) {
         this.year = year;
         this.month = month;
+    }
+
+    public static FinanceDate of(int year, int month) {
+        return new FinanceDate(year, month);
     }
 
     @Override
