@@ -21,11 +21,17 @@ public class FinanceAmount {
     protected FinanceAmount() {
     }
 
-    // TODO: 15/12/2019 amount 는 0 미만이 될 수 없음
     public FinanceAmount(int amount, FinanceDate financeDate, Institution institution) {
+        checkValidAmount(amount);
         this.amount = amount;
         this.financeDate = financeDate;
         this.institution = institution;
+    }
+
+    private void checkValidAmount(int amount) {
+        if(amount < 0) {
+            throw new InvalidAmountTypeException();
+        }
     }
 
     @Override
