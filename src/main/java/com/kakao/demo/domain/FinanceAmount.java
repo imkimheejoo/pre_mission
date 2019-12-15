@@ -5,6 +5,7 @@ import java.util.Objects;
 
 @Entity
 public class FinanceAmount {
+    public static final int MIN_AMOUNT = 0;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,15 +22,19 @@ public class FinanceAmount {
     protected FinanceAmount() {
     }
 
-    public FinanceAmount(int amount, FinanceDate financeDate, Institution institution) {
-        checkValidAmount(amount);
+    private FinanceAmount(int amount, FinanceDate financeDate, Institution institution) {
         this.amount = amount;
         this.financeDate = financeDate;
         this.institution = institution;
     }
 
-    private void checkValidAmount(int amount) {
-        if(amount < 0) {
+    public static FinanceAmount of(int amount, FinanceDate date, Institution institution) {
+        checkValidAmount(amount);
+        return new FinanceAmount(amount, date, institution);
+    }
+
+    private static void checkValidAmount(int amount) {
+        if (amount < MIN_AMOUNT) {
             throw new InvalidAmountTypeException();
         }
     }

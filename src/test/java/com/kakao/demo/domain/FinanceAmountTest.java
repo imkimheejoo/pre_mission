@@ -15,7 +15,7 @@ class FinanceAmountTest {
     public void of() {
         assertDoesNotThrow(() -> {
             int amount = 10;
-            new FinanceAmount(amount, date, institution);
+            FinanceAmount.of(amount, date, institution);
         });
     }
 
@@ -24,9 +24,7 @@ class FinanceAmountTest {
     public void createInvalidAmountTypeException() {
         assertThrows(InvalidAmountTypeException.class, () -> {
             int exceptionAmount = -1;
-            new FinanceAmount(exceptionAmount, date, institution);
+            FinanceAmount.of(exceptionAmount, date, institution);
         });
     }
-
-
 }
