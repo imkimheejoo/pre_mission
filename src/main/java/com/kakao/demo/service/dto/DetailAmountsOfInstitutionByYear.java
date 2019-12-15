@@ -3,7 +3,6 @@ package com.kakao.demo.service.dto;
 import java.util.Objects;
 
 public class DetailAmountsOfInstitutionByYear {
-
     private int year;
     private String name;
     private long sum;

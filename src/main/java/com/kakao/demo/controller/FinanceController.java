@@ -18,7 +18,7 @@ public class FinanceController {
     }
 
     @GetMapping("/api/load")
-    public ResponseEntity findFinanceData() {
+    public ResponseEntity loadFinanceData() {
         financeService.loadCsvFile();
         return ResponseEntity.ok().build();
     }
