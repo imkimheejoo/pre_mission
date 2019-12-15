@@ -1,10 +1,11 @@
 package com.kakao.demo.controller;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
 
+@AutoConfigureWebTestClient(timeout = "20000")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class InstitutionControllerTest extends FinanceAmountControllerTest {
 
@@ -26,7 +28,7 @@ class InstitutionControllerTest extends FinanceAmountControllerTest {
     }
 
     @Test
-    @DisplayName("금융기관 목록 출력하는 요청 테스트")
+    @DirtiesContext
     void findFinanceInstitutions() {
         List<String> expectedInstitutionNames =
                 Arrays.asList("우리은행", "신한은행", "하나은행", "농협은행/수협은행", "외환은행", "기타은행");

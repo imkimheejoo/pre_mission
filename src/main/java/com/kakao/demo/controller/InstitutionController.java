@@ -21,8 +21,7 @@ public class InstitutionController {
     public ResponseEntity findFinanceInstitutions(Model model) {
         List<InstitutionDto> institutions = institutionService.findInstitutions();
 
-        model.addAttribute("list", "금융기관 이름 정보");
-        model.addAttribute(institutions);
+        model.addAttribute("list", institutions);
 
         return ResponseEntity.ok(model);
     }

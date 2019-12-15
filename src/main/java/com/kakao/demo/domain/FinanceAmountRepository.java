@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface AmountRepository extends JpaRepository<FinanceAmount, Long> {
+public interface FinanceAmountRepository extends JpaRepository<FinanceAmount, Long> {
 
     @Query("select new com.kakao.demo.service.dto.DetailAmountsOfInstitutionByYear(" +
             "f.financeDate.year, i.name, sum(f.amount)) " +

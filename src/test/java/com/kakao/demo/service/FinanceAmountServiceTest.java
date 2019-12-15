@@ -1,6 +1,6 @@
 package com.kakao.demo.service;
 
-import com.kakao.demo.domain.AmountRepository;
+import com.kakao.demo.domain.FinanceAmountRepository;
 import com.kakao.demo.service.dto.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class FinanceAmountServiceTest {
     private InstitutionService institutionService;
 
     @Mock
-    private AmountRepository amountRepository;
+    private FinanceAmountRepository financeAmountRepository;
 
     @Test
     @DisplayName("년도별 각 기관들의 지원금액을 합산하고 각 기관들의 합산 금액을 찾는 기능 테스트")
@@ -43,7 +43,7 @@ class FinanceAmountServiceTest {
         detailAmountBy2006.put("국민은행", 1600L);
         detailAmountBy2006.put("하나은행", 1000L);
 
-        given(amountRepository.findTotalAmountGroupByInstitutionAndYear()).willReturn(detailAmountsOfInstitutionByYears);
+        given(financeAmountRepository.findTotalAmountGroupByInstitutionAndYear()).willReturn(detailAmountsOfInstitutionByYears);
 
         List<AmountsByYear> expectedAmountsByYears = Arrays.asList(
                 new AmountsByYear("2005 년", 2500, detailAmountBy2005),
@@ -61,7 +61,7 @@ class FinanceAmountServiceTest {
         Object[] record = {year, institution};
         List<Object[]> fetchedRecords = Collections.singletonList(record);
 
-        given(amountRepository.findInstitutionAndYearWithTheHighestAmount()).willReturn(fetchedRecords);
+        given(financeAmountRepository.findInstitutionAndYearWithTheHighestAmount()).willReturn(fetchedRecords);
 
         InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeAmountService.findInstitutionAndYearWithTheHighestAmount();
 
@@ -79,7 +79,7 @@ class FinanceAmountServiceTest {
                 new SupportedAmountOfInstitution(2006,3001),
                 new SupportedAmountOfInstitution(2007,2000));
 
-        given(amountRepository.findAverageAmountByInstitutionName(anyString())).willReturn(averageAmounts);
+        given(financeAmountRepository.findAverageAmountByInstitutionName(anyString())).willReturn(averageAmounts);
 
         StatisticAboutInstitution statistic = financeAmountService.findStatisticAboutInstitution("외환은행");
 

@@ -1,7 +1,7 @@
 package com.kakao.demo.service;
 
-import com.kakao.demo.domain.AmountRepository;
 import com.kakao.demo.domain.FinanceAmount;
+import com.kakao.demo.domain.FinanceAmountRepository;
 import com.kakao.demo.domain.FinanceDate;
 import com.kakao.demo.domain.Institution;
 import com.kakao.demo.service.dto.*;
@@ -18,11 +18,11 @@ public class FinanceAmountService {
     private static final String YEAR_UNIT = " 년";
 
     private final InstitutionService institutionService;
-    private final AmountRepository amountRepository;
+    private final FinanceAmountRepository financeAmountRepository;
 
-    public FinanceAmountService(InstitutionService institutionService, AmountRepository amountRepository) {
+    public FinanceAmountService(InstitutionService institutionService, FinanceAmountRepository financeAmountRepository) {
         this.institutionService = institutionService;
-        this.amountRepository = amountRepository;
+        this.financeAmountRepository = financeAmountRepository;
     }
 
     public void loadCsvFile() {
@@ -53,7 +53,7 @@ public class FinanceAmountService {
 
             int money = financeStatusByDate.getMeasure(i);
             FinanceAmount financeAmount = FinanceAmount.of(money, financeDate, institution);
-            amountRepository.save(financeAmount);
+            financeAmountRepository.save(financeAmount);
         }
     }
 
@@ -74,7 +74,7 @@ public class FinanceAmountService {
     }
 
     private List<DetailAmountsOfInstitutionByYear> findDetailAmountsByInstitutionAndYear() {
-        return amountRepository.findTotalAmountGroupByInstitutionAndYear();
+        return financeAmountRepository.findTotalAmountGroupByInstitutionAndYear();
     }
 
     private List<DetailAmountsOfInstitutionByYear> extractDetailAmountsByYear(List<DetailAmountsOfInstitutionByYear> allDetailPricesOfInstitution, int year) {
@@ -105,7 +105,7 @@ public class FinanceAmountService {
     }
 
     public InstitutionOfTheHighestAmount findInstitutionAndYearWithTheHighestAmount() {
-        List<Object[]> InstitutionOfTheHighestAmount = amountRepository.findInstitutionAndYearWithTheHighestAmount();
+        List<Object[]> InstitutionOfTheHighestAmount = financeAmountRepository.findInstitutionAndYearWithTheHighestAmount();
         int year = (int) InstitutionOfTheHighestAmount.get(0)[0];
         String institution = (String) InstitutionOfTheHighestAmount.get(0)[1];
 
@@ -113,7 +113,7 @@ public class FinanceAmountService {
     }
 
     public StatisticAboutInstitution findStatisticAboutInstitution(String institution) {
-        List<SupportedAmountOfInstitution> averageAmounts = amountRepository.findAverageAmountByInstitutionName(institution);
+        List<SupportedAmountOfInstitution> averageAmounts = financeAmountRepository.findAverageAmountByInstitutionName(institution);
 
         Comparator<SupportedAmountOfInstitution> comparator = Comparator.comparingDouble(SupportedAmountOfInstitution::getAmount);
         SupportedAmountOfInstitution min = averageAmounts.stream().min(comparator).orElseThrow(NotFoundAmountException::new);
