@@ -5,6 +5,9 @@ import java.util.Objects;
 public class InstitutionDto {
     private String name;
 
+    private InstitutionDto() {
+    }
+
     public InstitutionDto(String name) {
         this.name = name;
     }

@@ -14,6 +14,9 @@ public class Measures {
     private int month;
     private List<Integer> measures;
 
+    private Measures() {
+    }
+
     private Measures(int year, int month, List<Integer> measures) {
         this.year = year;
         this.month = month;
