@@ -34,17 +34,17 @@ public class FinanceAmountService {
         List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(institutionNames);
 
         //측정값 저장
-        List<Measures> measures = DataConverter.extractMeasures(inputData.subList(1, inputData.size()));
+        List<Row> measures = DataConverter.extractRows(inputData.subList(1, inputData.size()));
         save(measures, institutionDtos);
     }
 
-    private void save(List<Measures> measuresByDate, List<InstitutionDto> institutionDtos) {
-        for (Measures measures : measuresByDate) {
-            saveByDate(measures, institutionDtos);
+    private void save(List<Row> rowByDate, List<InstitutionDto> institutionDtos) {
+        for (Row row : rowByDate) {
+            saveByDate(row, institutionDtos);
         }
     }
 
-    private void saveByDate(Measures financeStatusByDate, List<InstitutionDto> institutionDtos) {
+    private void saveByDate(Row financeStatusByDate, List<InstitutionDto> institutionDtos) {
         FinanceDate financeDate = FinanceDate.of(financeStatusByDate.getYear(), financeStatusByDate.getMonth());
 
         for (int i = 0; i < institutionDtos.size(); i++) {

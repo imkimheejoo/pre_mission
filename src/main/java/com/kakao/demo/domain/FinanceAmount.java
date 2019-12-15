@@ -10,7 +10,7 @@ public class FinanceAmount {
     private Long id;
 
     @Column(nullable = false)
-    private int price;
+    private int amount;
 
     @Embedded
     private FinanceDate financeDate;
@@ -21,8 +21,9 @@ public class FinanceAmount {
     protected FinanceAmount() {
     }
 
-    public FinanceAmount(int price, FinanceDate financeDate, Institution institution) {
-        this.price = price;
+    // TODO: 15/12/2019 amount 는 0 미만이 될 수 없음
+    public FinanceAmount(int amount, FinanceDate financeDate, Institution institution) {
+        this.amount = amount;
         this.financeDate = financeDate;
         this.institution = institution;
     }

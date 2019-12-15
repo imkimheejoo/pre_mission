@@ -33,8 +33,8 @@ public class FinanceAmountController {
     public ResponseEntity findInstitutionOfMaxAmount(Model model) {
         InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeAmountService.findInstitutionAndYearWithTheHighestAmount();
 
-        model.addAttribute("year",institutionAndYearWithTheHighestAmount.getYear());
-        model.addAttribute("bank",institutionAndYearWithTheHighestAmount.getInstitution());
+        model.addAttribute("year", institutionAndYearWithTheHighestAmount.getYear());
+        model.addAttribute("bank", institutionAndYearWithTheHighestAmount.getInstitution());
 
         return ResponseEntity.ok(model);
     }
