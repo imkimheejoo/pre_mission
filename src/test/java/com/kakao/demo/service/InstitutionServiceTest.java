@@ -28,8 +28,8 @@ class InstitutionServiceTest {
     @Test
     @DisplayName("입력정보 중 기관들을 찾아 저장하는 기능 테스트")
     void saveInstitutions() {
-        List<String> inputs = Arrays.asList("년도", "월", "주택도시기금1)(억원)", "국민은행(억원)", "우리은행(억원)", "신한은행(억원)",
-                "한국시티은행(억원)", "하나은행(억원)", "농협은행/수협은행(억원)", "외환은행(억원)", "기타은행(억원)", "", "");
+        List<String> inputs = Arrays.asList("주택도시기금", "국민은행", "우리은행", "신한은행",
+                "한국시티은행", "하나은행", "농협은행/수협은행", "외환은행", "기타은행");
         List<InstitutionDto> expectedResults = Arrays.asList(
                 new InstitutionDto("주택도시기금"),
                 new InstitutionDto("국민은행"),
@@ -40,13 +40,13 @@ class InstitutionServiceTest {
                 new InstitutionDto("농협은행/수협은행"),
                 new InstitutionDto("외환은행"),
                 new InstitutionDto("기타은행"));
+
         List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(inputs);
 
         assertThat(institutionDtos.size()).isEqualTo(expectedResults.size());
         for (int i = 0; i < institutionDtos.size(); i++) {
             assertThat(institutionDtos.get(i)).isEqualTo(expectedResults.get(i));
         }
-
     }
 
     @Test
