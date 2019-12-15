@@ -36,4 +36,13 @@ class FinanceControllerTest {
                 .jsonPath("$.year").value(equalTo(2014))
                 .jsonPath("$.bank").value(equalTo("주택도시기금"));
     }
+
+    @Test
+    void findStatisticAboutKEB() {
+        webTestClient.get().uri("/api/find/statistic/keb").exchange()
+                .expectStatus().isOk().expectBody()
+                .jsonPath("$.bank").value(equalTo("외환은행"))
+                .jsonPath("$.support_amount..year").value(hasSize(2))
+                .jsonPath("$.support_amount..amount").value(hasSize(2));
+    }
 }

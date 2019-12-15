@@ -3,15 +3,15 @@ package com.kakao.demo.service.dto;
 import java.util.Map;
 import java.util.Objects;
 
-public class AmountByYear {
+public class AmountsByYear {
     private String year;
     private long totalAmount;
     private Map<String, Long> detailAmount;
 
-    private AmountByYear() {
+    private AmountsByYear() {
     }
 
-    public AmountByYear(String year, long totalAmount, Map<String, Long> detailAmount) {
+    public AmountsByYear(String year, long totalAmount, Map<String, Long> detailAmount) {
         this.year = year;
         this.totalAmount = totalAmount;
         this.detailAmount = detailAmount;
@@ -33,7 +33,7 @@ public class AmountByYear {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AmountByYear that = (AmountByYear) o;
+        AmountsByYear that = (AmountsByYear) o;
         return totalAmount == that.totalAmount &&
                 Objects.equals(year, that.year) &&
                 Objects.equals(detailAmount, that.detailAmount);

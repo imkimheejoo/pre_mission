@@ -1,8 +1,9 @@
 package com.kakao.demo.controller;
 
 import com.kakao.demo.service.FinanceService;
-import com.kakao.demo.service.dto.AmountByYear;
+import com.kakao.demo.service.dto.AmountsByYear;
 import com.kakao.demo.service.dto.InstitutionOfTheHighestAmount;
+import com.kakao.demo.service.dto.StatisticAboutInstitution;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class FinanceController {
 
     @GetMapping("/api/find/status")
     public ResponseEntity findTotalAmountAboutInstitutionByYear(Model model) {
-        List<AmountByYear> totalAmountOfInstitutionsByYear = financeService.findTotalAmountOfInstitutionsByYear();
+        List<AmountsByYear> totalAmountOfInstitutionsByYear = financeService.findTotalAmountOfInstitutionsByYear();
         model.addAttribute("name", "주택금융 공급현황");
         model.addAttribute("amountsByYear", totalAmountOfInstitutionsByYear);
 
@@ -38,6 +39,16 @@ public class FinanceController {
         InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeService.findInstitutionAndYearWithTheHighestAmount();
         model.addAttribute("year",institutionAndYearWithTheHighestAmount.getYear());
         model.addAttribute("bank",institutionAndYearWithTheHighestAmount.getInstitution());
+
+        return ResponseEntity.ok(model);
+    }
+
+    @GetMapping("/api/find/statistic/keb")
+    public ResponseEntity findStatisticAboutKEB(Model model) {
+        StatisticAboutInstitution statisticOfInstitution = financeService.findStatisticAboutInstitution("외환은행");
+
+        model.addAttribute("bank", statisticOfInstitution.getInstitution());
+        model.addAttribute("support_amount", statisticOfInstitution.getSupportedAmount());
 
         return ResponseEntity.ok(model);
     }

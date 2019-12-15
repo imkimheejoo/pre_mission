@@ -1,8 +1,10 @@
 package com.kakao.demo.domain;
 
 import com.kakao.demo.service.dto.DetailAmountsOfInstitutionByYear;
+import com.kakao.demo.service.dto.SupportedAmountOfInstitution;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -23,4 +25,10 @@ public interface AmountRepository extends JpaRepository<FinanceAmount, Long> {
             "group by i.name ,f.year) g " +
             "order by g.total desc limit 1", nativeQuery = true)
     List<Object[]> findInstitutionAndYearWithTheHighestAmount();
+
+    @Query("select new com.kakao.demo.service.dto.SupportedAmountOfInstitution(f.financeDate.year, round(avg(f.price)))" +
+            "from FinanceAmount f , Institution i " +
+            "where f.institution.name = :institution " +
+            "group by f.financeDate.year")
+    List<SupportedAmountOfInstitution> findAverageAmountByInstitutionName(@Param("institution") String institution);
 }

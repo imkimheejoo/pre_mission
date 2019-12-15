@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class FinanceService {
     private static final int COLUMN_INDEX = 0;
     private static final String YEAR_UNIT = " 년";
-    public static final int FIRST_ROW = 0;
 
     private final InstitutionService institutionService;
     private final AmountRepository amountRepository;
@@ -58,8 +57,8 @@ public class FinanceService {
         }
     }
 
-    public List<AmountByYear> findTotalAmountOfInstitutionsByYear() {
-        List<AmountByYear> amounts = new ArrayList<>();
+    public List<AmountsByYear> findTotalAmountOfInstitutionsByYear() {
+        List<AmountsByYear> amounts = new ArrayList<>();
         List<DetailAmountsOfInstitutionByYear> allDetailAmountsOfInstitution = findDetailAmountsByInstitutionAndYear();
 
         Set<Integer> years = extractAllYears(allDetailAmountsOfInstitution);
@@ -68,7 +67,7 @@ public class FinanceService {
 
             Map<String, Long> detailAmount = convertToMap(extractedDetailAmountsByYear);
             long totalAmount = findTotalAmountByYear(detailAmount);
-            amounts.add(new AmountByYear(year + YEAR_UNIT, totalAmount, detailAmount));
+            amounts.add(new AmountsByYear(year + YEAR_UNIT, totalAmount, detailAmount));
         }
 
         return amounts;
@@ -111,6 +110,16 @@ public class FinanceService {
         String institution = (String) InstitutionOfTheHighestAmount.get(0)[1];
 
         return new InstitutionOfTheHighestAmount(year, institution);
+    }
+
+    public StatisticAboutInstitution findStatisticAboutInstitution(String institution) {
+        List<SupportedAmountOfInstitution> averageAmounts = amountRepository.findAverageAmountByInstitutionName(institution);
+
+        Comparator<SupportedAmountOfInstitution> comparator = Comparator.comparingDouble(SupportedAmountOfInstitution::getAmount);
+        SupportedAmountOfInstitution min = averageAmounts.stream().min(comparator).orElseThrow(NotFoundAmountException::new);
+        SupportedAmountOfInstitution max = averageAmounts.stream().max(comparator).orElseThrow(NotFoundAmountException::new);
+
+        return new StatisticAboutInstitution(institution, Arrays.asList(min, max));
     }
 }
 
