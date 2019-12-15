@@ -1,9 +1,9 @@
 package com.kakao.demo.controller;
 
 import com.kakao.demo.service.FinanceService;
-import com.kakao.demo.service.dto.TotalPriceOfInstitutionByYear;
-import org.springframework.http.HttpStatus;
+import com.kakao.demo.service.dto.AmountByYear;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,15 +18,17 @@ public class FinanceController {
     }
 
     @GetMapping("/api/load")
-    public ResponseEntity findFinanceStatus() {
+    public ResponseEntity findFinanceData() {
         financeService.loadCsvFile();
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/api/find/price")
-    public ResponseEntity<List<TotalPriceOfInstitutionByYear>> findFinanceInstitutions() {
-        List<TotalPriceOfInstitutionByYear> totalPriceOfInstitutionscByYearByYear = financeService.findTotalPriceOfInstitutionsByYear();
-        return new ResponseEntity<>(totalPriceOfInstitutionscByYearByYear, HttpStatus.OK);
-    }
+    @GetMapping("/api/find/status")
+    public ResponseEntity findTotalAmountAboutInstitutionByYear(Model model) {
+        List<AmountByYear> totalAmountOfInstitutionsByYear = financeService.findTotalAmountOfInstitutionsByYear();
+        model.addAttribute("name", "주택금융 공급현황");
+        model.addAttribute("amountsByYear", totalAmountOfInstitutionsByYear);
 
+        return ResponseEntity.ok(model);
+    }
 }
