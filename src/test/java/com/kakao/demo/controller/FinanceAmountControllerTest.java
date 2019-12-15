@@ -8,7 +8,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class FinanceControllerTest {
+class FinanceAmountControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 

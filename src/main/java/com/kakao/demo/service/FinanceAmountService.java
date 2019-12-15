@@ -13,14 +13,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class FinanceService {
+public class FinanceAmountService {
     private static final int COLUMN_INDEX = 0;
     private static final String YEAR_UNIT = " 년";
 
     private final InstitutionService institutionService;
     private final AmountRepository amountRepository;
 
-    public FinanceService(InstitutionService institutionService, AmountRepository amountRepository) {
+    public FinanceAmountService(InstitutionService institutionService, AmountRepository amountRepository) {
         this.institutionService = institutionService;
         this.amountRepository = amountRepository;
     }

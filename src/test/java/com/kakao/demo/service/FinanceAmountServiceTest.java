@@ -16,10 +16,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
-class FinanceServiceTest {
+class FinanceAmountServiceTest {
 
     @InjectMocks
-    private FinanceService financeService;
+    private FinanceAmountService financeAmountService;
 
     @Mock
     private InstitutionService institutionService;
@@ -49,7 +49,7 @@ class FinanceServiceTest {
                 new AmountsByYear("2005 년", 2500, detailAmountBy2005),
                 new AmountsByYear("2006 년", 2600, detailAmountBy2006));
 
-        List<AmountsByYear> totalAmountsOfInstitutionsByYear = financeService.findTotalAmountOfInstitutionsByYear();
+        List<AmountsByYear> totalAmountsOfInstitutionsByYear = financeAmountService.findTotalAmountOfInstitutionsByYear();
         assertThat(totalAmountsOfInstitutionsByYear).isEqualTo(expectedAmountsByYears);
     }
 
@@ -63,7 +63,7 @@ class FinanceServiceTest {
 
         given(amountRepository.findInstitutionAndYearWithTheHighestAmount()).willReturn(fetchedRecords);
 
-        InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeService.findInstitutionAndYearWithTheHighestAmount();
+        InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeAmountService.findInstitutionAndYearWithTheHighestAmount();
 
         assertThat(institutionAndYearWithTheHighestAmount.getYear()).isEqualTo(year);
         assertThat(institutionAndYearWithTheHighestAmount.getInstitution()).isEqualTo(institution);
@@ -81,7 +81,7 @@ class FinanceServiceTest {
 
         given(amountRepository.findAverageAmountByInstitutionName(anyString())).willReturn(averageAmounts);
 
-        StatisticAboutInstitution statistic = financeService.findStatisticAboutInstitution("외환은행");
+        StatisticAboutInstitution statistic = financeAmountService.findStatisticAboutInstitution("외환은행");
 
         assertThat(statistic.getInstitution()).isEqualTo("외환은행");
         assertThat(statistic.getSupportedAmount().get(minIndex)).isEqualTo(new SupportedAmountOfInstitution(2005,1111));

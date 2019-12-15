@@ -13,7 +13,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasItem;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class InstitutionControllerTest extends FinanceControllerTest{
+class InstitutionControllerTest extends FinanceAmountControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
