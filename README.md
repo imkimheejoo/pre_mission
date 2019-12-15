@@ -98,7 +98,7 @@ Date: Sun, 15 Dec 2019 14:32:08 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 - Body
-
+```
     {
     "name": "주택금융 공급현황",
     "amountsByYear": [
@@ -117,7 +117,7 @@ Connection: keep-alive
     "기타은행": 90925
     }
     },...
-
+```
 ### 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API 개발
 
 **[요청 URI]**
@@ -133,14 +133,13 @@ Date: Sun, 15 Dec 2019 14:33:41 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 - Body
-
+```
     {
     "year": 2014,
     "bank": "주택도시기금"
     }
-
-5번
-
+```
+### 전체 년도(2005~2016)에서 외환은행의 지원금액 평균 중에서 가장 작은 금액과 큰 금액을 출력하는 API 개발
 **[요청 URI]**
 
 - GET [http://localhost:8080/api/find/statistic/keb](http://localhost:8080/api/find/statistic/keb)
@@ -154,7 +153,7 @@ Date: Sun, 15 Dec 2019 14:35:37 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 - Body
-
+```
     {
     "bank": "외환은행",
     "support_amount": [
@@ -168,6 +167,6 @@ Connection: keep-alive
     }
     ]
     }
-
+```
 ## 빌드 및 실행방법
 - Build : Gradle
