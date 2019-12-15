@@ -12,7 +12,15 @@ public interface AmountRepository extends JpaRepository<FinanceAmount, Long> {
             "f.financeDate.year, i.name, sum(f.price)) " +
             "from Institution i left join FinanceAmount f " +
             "on i.id = f.institution.id " +
-            "group by i.name ,f.financeDate.year")
+            "group by i.name ,f.financeDate.year " +
+            "order by f.financeDate.year")
     List<DetailAmountsOfInstitutionByYear> findTotalPriceGroupByInstitutionAndYear();
 
+    @Query(value = "select g.year, g.name " +
+            "from (select f.year as year , i.name as name , sum(f.price) as total " +
+            "from INSTITUTION i left join FINANCE_AMOUNT f " +
+            "on i.id = f.institution_id " +
+            "group by i.name ,f.year) g " +
+            "order by g.total desc limit 1", nativeQuery = true)
+    List<Object[]> findInstitutionAndYearWithTheHighestAmount();
 }

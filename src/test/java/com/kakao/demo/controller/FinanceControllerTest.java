@@ -24,8 +24,16 @@ class FinanceControllerTest {
                 .expectStatus().isOk().expectBody()
                 .jsonPath("$.name").value(equalTo("주택금융 공급현황"))
                 .jsonPath("$..amountsByYear").exists()
-                .jsonPath("$..totalAmount").value(hasItem(304069))
+                .jsonPath("$..totalAmount").value(hasSize(13))
                 .jsonPath("$..detailAmount").value(hasSize(13))
                 .jsonPath("$..year").value(hasItem("2016 년"));
+    }
+
+    @Test
+    void findInstitutionOfMaxAmount() {
+        webTestClient.get().uri("/api/find/max/institution").exchange()
+                .expectStatus().isOk().expectBody()
+                .jsonPath("$.year").value(equalTo(2014))
+                .jsonPath("$.bank").value(equalTo("주택도시기금"));
     }
 }

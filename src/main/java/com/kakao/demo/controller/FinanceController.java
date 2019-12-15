@@ -2,6 +2,7 @@ package com.kakao.demo.controller;
 
 import com.kakao.demo.service.FinanceService;
 import com.kakao.demo.service.dto.AmountByYear;
+import com.kakao.demo.service.dto.InstitutionOfTheHighestAmount;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,15 @@ public class FinanceController {
         List<AmountByYear> totalAmountOfInstitutionsByYear = financeService.findTotalAmountOfInstitutionsByYear();
         model.addAttribute("name", "주택금융 공급현황");
         model.addAttribute("amountsByYear", totalAmountOfInstitutionsByYear);
+
+        return ResponseEntity.ok(model);
+    }
+
+    @GetMapping("/api/find/max/institution")
+    public ResponseEntity findInstitutionOfMaxAmount(Model model) {
+        InstitutionOfTheHighestAmount institutionAndYearWithTheHighestAmount = financeService.findInstitutionAndYearWithTheHighestAmount();
+        model.addAttribute("year",institutionAndYearWithTheHighestAmount.getYear());
+        model.addAttribute("bank",institutionAndYearWithTheHighestAmount.getInstitution());
 
         return ResponseEntity.ok(model);
     }

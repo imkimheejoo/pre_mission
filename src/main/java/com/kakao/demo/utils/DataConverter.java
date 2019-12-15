@@ -25,8 +25,8 @@ public class DataConverter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> extractInstitutionNames(List<String> institutionNames) {
-        List<String> filteredInstitutions = institutionNames.subList(INSTITUTION_START_INDEX, institutionNames.size());
+    public static List<String> extractInstitutionNames(List<String> row) {
+        List<String> filteredInstitutions = row.subList(INSTITUTION_START_INDEX, row.size());
         List<String> realInstitutions = deleteEmptyValue(filteredInstitutions);
 
         return deleteBenchMark(realInstitutions);

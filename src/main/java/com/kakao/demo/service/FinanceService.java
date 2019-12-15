@@ -4,10 +4,7 @@ import com.kakao.demo.domain.AmountRepository;
 import com.kakao.demo.domain.FinanceAmount;
 import com.kakao.demo.domain.FinanceDate;
 import com.kakao.demo.domain.Institution;
-import com.kakao.demo.service.dto.AmountByYear;
-import com.kakao.demo.service.dto.DetailAmountsOfInstitutionByYear;
-import com.kakao.demo.service.dto.InstitutionDto;
-import com.kakao.demo.service.dto.Measures;
+import com.kakao.demo.service.dto.*;
 import com.kakao.demo.utils.DataConverter;
 import com.kakao.demo.utils.DataLoader;
 import org.springframework.stereotype.Service;
@@ -19,6 +16,7 @@ import java.util.stream.Collectors;
 public class FinanceService {
     private static final int COLUMN_INDEX = 0;
     private static final String YEAR_UNIT = " 년";
+    public static final int FIRST_ROW = 0;
 
     private final InstitutionService institutionService;
     private final AmountRepository amountRepository;
@@ -105,6 +103,14 @@ public class FinanceService {
                 .collect(Collectors.toMap(
                         DetailAmountsOfInstitutionByYear::getName,
                         DetailAmountsOfInstitutionByYear::getSum));
+    }
+
+    public InstitutionOfTheHighestAmount findInstitutionAndYearWithTheHighestAmount() {
+        List<Object[]> InstitutionOfTheHighestAmount = amountRepository.findInstitutionAndYearWithTheHighestAmount();
+        int year = (int) InstitutionOfTheHighestAmount.get(0)[0];
+        String institution = (String) InstitutionOfTheHighestAmount.get(0)[1];
+
+        return new InstitutionOfTheHighestAmount(year, institution);
     }
 }
 

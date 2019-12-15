@@ -2,7 +2,7 @@ package com.kakao.demo.service.dto;
 
 import java.util.Objects;
 
-public class DetailAmountsOfInstitutionByYear {
+public class DetailAmountsOfInstitutionByYear implements Comparable<DetailAmountsOfInstitutionByYear> {
     private int year;
     private String name;
     private long sum;
@@ -26,6 +26,11 @@ public class DetailAmountsOfInstitutionByYear {
 
     public long getSum() {
         return sum;
+    }
+
+    @Override
+    public int compareTo(DetailAmountsOfInstitutionByYear o) {
+        return Long.compare(o.sum, this.sum);
     }
 
     @Override
