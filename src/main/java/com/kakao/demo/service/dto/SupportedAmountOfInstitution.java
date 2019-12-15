@@ -9,9 +9,9 @@ public class SupportedAmountOfInstitution {
     private SupportedAmountOfInstitution() {
     }
 
-    public SupportedAmountOfInstitution(int year, int amount) {
+    public SupportedAmountOfInstitution(int year, double amount) {
         this.year = year;
-        this.amount = amount;
+        this.amount = Double.valueOf(amount).intValue();
     }
 
     public int getYear() {

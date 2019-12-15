@@ -74,7 +74,7 @@ public class FinanceAmountService {
     }
 
     private List<DetailAmountsOfInstitutionByYear> findDetailAmountsByInstitutionAndYear() {
-        return amountRepository.findTotalPriceGroupByInstitutionAndYear();
+        return amountRepository.findTotalAmountGroupByInstitutionAndYear();
     }
 
     private List<DetailAmountsOfInstitutionByYear> extractDetailAmountsByYear(List<DetailAmountsOfInstitutionByYear> allDetailPricesOfInstitution, int year) {

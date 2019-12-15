@@ -18,12 +18,12 @@ public class InstitutionController {
     }
 
     @GetMapping("/api/find/institutions")
-    public ResponseEntity<List<InstitutionDto>> findFinanceInstitutions(Model model) {
+    public ResponseEntity findFinanceInstitutions(Model model) {
         List<InstitutionDto> institutions = institutionService.findInstitutions();
 
         model.addAttribute("list", "금융기관 이름 정보");
         model.addAttribute(institutions);
 
-        return ResponseEntity.ok(institutions);
+        return ResponseEntity.ok(model);
     }
 }

@@ -43,7 +43,7 @@ class FinanceAmountServiceTest {
         detailAmountBy2006.put("국민은행", 1600L);
         detailAmountBy2006.put("하나은행", 1000L);
 
-        given(amountRepository.findTotalPriceGroupByInstitutionAndYear()).willReturn(detailAmountsOfInstitutionByYears);
+        given(amountRepository.findTotalAmountGroupByInstitutionAndYear()).willReturn(detailAmountsOfInstitutionByYears);
 
         List<AmountsByYear> expectedAmountsByYears = Arrays.asList(
                 new AmountsByYear("2005 년", 2500, detailAmountBy2005),
