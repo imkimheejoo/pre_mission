@@ -1,5 +1,16 @@
 ## 카카오페이 사전 과제
 **[주택 금융 서비스 API 개발]**
+## 빌드 및 실행방법
+[필수] git과 java 설치
+
+터미널에서 다음 명령을 실행합니다.
+```
+#!/bin/bash
+$ git clone https://github.com/imkimheejoo/pre_mission
+$ cd pre_mission
+$ ./gradlew clean build
+$ java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+```
 
 ## 개발프레임워크
 [Back-End]
@@ -161,5 +172,3 @@ Connection: keep-alive
     ]
     }
 ```
-## 빌드 및 실행방법
-- Build : Gradle
