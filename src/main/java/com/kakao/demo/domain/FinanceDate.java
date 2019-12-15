@@ -5,6 +5,10 @@ import java.util.Objects;
 
 @Embeddable
 public class FinanceDate {
+    private static final int MIN_YEAR = 0;
+    private static final int MIN_MONTH = 1;
+    private static final int MAX_MONTH = 12;
+
     private int year;
     private int month;
 
@@ -17,7 +21,22 @@ public class FinanceDate {
     }
 
     public static FinanceDate of(int year, int month) {
+        checkValidDate(year, month);
         return new FinanceDate(year, month);
+    }
+
+    private static void checkValidDate(int year, int month) {
+        if (isValidYear(year) || isValidMonth(month)){
+            throw new InvalidFinanceDateTypeException();
+        }
+    }
+
+    private static boolean isValidYear(int year) {
+        return year < MIN_YEAR;
+    }
+
+    private static boolean isValidMonth(int month) {
+        return MIN_MONTH > month || MAX_MONTH < month;
     }
 
     public int getYear() {

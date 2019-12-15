@@ -52,7 +52,7 @@ public class FinanceAmountService {
             Institution institution = institutionService.findByName(institutionName);
 
             int money = financeStatusByDate.getMeasure(i);
-            FinanceAmount financeAmount = new FinanceAmount(money, financeDate, institution);
+            FinanceAmount financeAmount = FinanceAmount.of(money, financeDate, institution);
             amountRepository.save(financeAmount);
         }
     }
