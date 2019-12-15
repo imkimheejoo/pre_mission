@@ -3,12 +3,12 @@ package com.kakao.demo.service.dto;
 public class TotalPriceOfInstitutionByYear {
 
     private int year;
-    private long institutionId;
+    private String name;
     private long sum;
 
-    public TotalPriceOfInstitutionByYear(int year, long institutionId, long sum) {
+    public TotalPriceOfInstitutionByYear(int year, String name, long sum) {
         this.year = year;
-        this.institutionId = institutionId;
+        this.name = name;
         this.sum = sum;
     }
 
@@ -16,8 +16,8 @@ public class TotalPriceOfInstitutionByYear {
         return year;
     }
 
-    public long getInstitutionId() {
-        return institutionId;
+    public String getName() {
+        return name;
     }
 
     public long getSum() {
