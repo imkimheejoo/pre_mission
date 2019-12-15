@@ -10,19 +10,19 @@ public class FinanceAmount {
     private Long id;
 
     @Column(nullable = false)
-    private int money;
+    private int price;
 
     @Embedded
     private FinanceDate financeDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Institution institution;
 
     protected FinanceAmount() {
     }
 
-    public FinanceAmount(int money, FinanceDate financeDate, Institution institution) {
-        this.money = money;
+    public FinanceAmount(int price, FinanceDate financeDate, Institution institution) {
+        this.price = price;
         this.financeDate = financeDate;
         this.institution = institution;
     }

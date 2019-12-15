@@ -20,6 +20,14 @@ public class FinanceDate {
         return new FinanceDate(year, month);
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

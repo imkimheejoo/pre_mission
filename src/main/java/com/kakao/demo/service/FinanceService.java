@@ -6,8 +6,11 @@ import com.kakao.demo.domain.FinanceDate;
 import com.kakao.demo.domain.Institution;
 import com.kakao.demo.service.dto.InstitutionDto;
 import com.kakao.demo.service.dto.Measures;
+import com.kakao.demo.service.dto.TotalPriceOfInstitutionByYear;
 import com.kakao.demo.utils.DataConverter;
 import com.kakao.demo.utils.DataLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FinanceService {
+    private static final Logger log = LoggerFactory.getLogger(FinanceService.class);
     private static final int COLUMN_INDEX = 0;
 
     private final InstitutionService institutionService;
@@ -57,6 +61,10 @@ public class FinanceService {
 
         List<Measures> measures = DataConverter.extractMeasures(inputData.subList(1, inputData.size()));
         save(measures, institutionDtos);
+    }
+
+    public List<TotalPriceOfInstitutionByYear> findTotalPriceOfInstitutionsByYear() {
+        return amountRepository.findTotalOfDetailFinancePriceGroupByInstitutionAndMonth();
     }
 }
 
