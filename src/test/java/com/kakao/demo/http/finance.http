@@ -7,10 +7,12 @@
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
 GET http://localhost:8080/api/load
+
 ###
 
 GET http://localhost:8080/api/find/institutions
 Accept: application/json
+
 ###
 
 GET http://localhost:8080/api/find/status
@@ -20,8 +22,10 @@ Accept: application/json
 
 GET http://localhost:8080/api/find/max/institution
 Accept: application/json
+
 ###
 
 GET http://localhost:8080/api/find/statistic/keb
 Accept: application/json
+
 ###

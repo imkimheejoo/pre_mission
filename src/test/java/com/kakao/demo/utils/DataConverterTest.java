@@ -37,7 +37,7 @@ class DataConverterTest {
         List<String> expectedInputs = Arrays.asList("주택도시기금", "국민은행", "우리은행", "신한은행",
                 "한국시티은행", "하나은행", "농협은행/수협은행", "외환은행", "기타은행");
 
-        List<String> results = DataConverter.extractInstitutionNames(inputs);
+        List<String> results = DataConverter.extractSubValue(inputs);
 
         assertThat(results).isEqualTo(expectedInputs);
     }

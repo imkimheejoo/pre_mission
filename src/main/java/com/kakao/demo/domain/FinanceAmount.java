@@ -5,7 +5,8 @@ import java.util.Objects;
 
 @Entity
 public class FinanceAmount {
-    public static final int MIN_AMOUNT = 0;
+    private static final int MIN_AMOUNT = 0;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,6 +38,22 @@ public class FinanceAmount {
         if (amount < MIN_AMOUNT) {
             throw new InvalidAmountTypeException();
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public FinanceDate getFinanceDate() {
+        return financeDate;
+    }
+
+    public Institution getInstitution() {
+        return institution;
     }
 
     @Override

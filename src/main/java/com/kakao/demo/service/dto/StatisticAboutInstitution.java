@@ -3,13 +3,6 @@ package com.kakao.demo.service.dto;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * {
- * “bank”:”외환은행”, "support_amount”: [
- * { ”year”: 2008 , ”amount”: 78},
- * { ”year”: 2015 , ”amount”: 1702} ]
- * }
- */
 public class StatisticAboutInstitution {
     private String institution;
     private List<SupportedAmountOfInstitution> supportedAmount;

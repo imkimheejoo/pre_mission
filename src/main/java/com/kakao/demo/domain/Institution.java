@@ -27,7 +27,7 @@ public class Institution {
         this.code = code;
     }
 
-    public static Institution of(String name) {
+    public static Institution from(String name) {
         return new Institution(name, INSTITUTION_CODE_PREFIX + atomicInteger.getAndIncrement());
     }
 

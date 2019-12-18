@@ -26,16 +26,16 @@ public class FinanceDate {
     }
 
     private static void checkValidDate(int year, int month) {
-        if (isValidYear(year) || isValidMonth(month)){
+        if (isInValidYear(year) || isInValidMonth(month)) {
             throw new InvalidFinanceDateTypeException();
         }
     }
 
-    private static boolean isValidYear(int year) {
+    private static boolean isInValidYear(int year) {
         return year < MIN_YEAR;
     }
 
-    private static boolean isValidMonth(int month) {
+    private static boolean isInValidMonth(int month) {
         return MIN_MONTH > month || MAX_MONTH < month;
     }
 

@@ -27,7 +27,7 @@ public class DataConverter {
         int year = Integer.parseInt(input[YEAR_INDEX]);
         int month = Integer.parseInt(input[MONTH_INDEX]);
 
-        List<String> amounts = extractInstitutionNames(Arrays.asList(input));
+        List<String> amounts = extractSubValue(Arrays.asList(input));
         List<Integer> removedSeparatorOfAmount = convertStringToInt(amounts);
 
         return new Row(year, month, removedSeparatorOfAmount);
@@ -40,7 +40,7 @@ public class DataConverter {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> extractInstitutionNames(List<String> row) {
+    public static List<String> extractSubValue(List<String> row) {
         List<String> filteredInstitutions = row.subList(INSTITUTION_START_INDEX, row.size());
         List<String> realInstitutions = deleteEmptyValue(filteredInstitutions);
 

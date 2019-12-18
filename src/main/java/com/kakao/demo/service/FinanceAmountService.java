@@ -30,7 +30,7 @@ public class FinanceAmountService {
 
         //기관 저장
         List<String> firstRows = Arrays.stream(inputData.get(COLUMN_INDEX)).collect(Collectors.toList());
-        List<String> institutionNames = DataConverter.extractInstitutionNames(firstRows);
+        List<String> institutionNames = DataConverter.extractSubValue(firstRows);
         List<InstitutionDto> institutionDtos = institutionService.saveInstitutions(institutionNames);
 
         //측정값 저장

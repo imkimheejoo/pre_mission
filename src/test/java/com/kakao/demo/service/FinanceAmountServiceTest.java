@@ -75,16 +75,16 @@ class FinanceAmountServiceTest {
         int minIndex = 0;
         int maxIndex = 1;
         List<SupportedAmountOfInstitution> averageAmounts = Arrays.asList(
-                new SupportedAmountOfInstitution(2005,1111),
-                new SupportedAmountOfInstitution(2006,3001),
-                new SupportedAmountOfInstitution(2007,2000));
+                new SupportedAmountOfInstitution(2005, 1111),
+                new SupportedAmountOfInstitution(2006, 3001),
+                new SupportedAmountOfInstitution(2007, 2000));
 
         given(financeAmountRepository.findAverageAmountByInstitutionName(anyString())).willReturn(averageAmounts);
 
         StatisticAboutInstitution statistic = financeAmountService.findStatisticAboutInstitution("외환은행");
 
         assertThat(statistic.getInstitution()).isEqualTo("외환은행");
-        assertThat(statistic.getSupportedAmount().get(minIndex)).isEqualTo(new SupportedAmountOfInstitution(2005,1111));
-        assertThat(statistic.getSupportedAmount().get(maxIndex)).isEqualTo(new SupportedAmountOfInstitution(2006,3001));
+        assertThat(statistic.getSupportedAmount().get(minIndex)).isEqualTo(new SupportedAmountOfInstitution(2005, 1111));
+        assertThat(statistic.getSupportedAmount().get(maxIndex)).isEqualTo(new SupportedAmountOfInstitution(2006, 3001));
     }
 }

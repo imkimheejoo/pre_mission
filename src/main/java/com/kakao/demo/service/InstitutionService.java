@@ -20,7 +20,7 @@ public class InstitutionService {
 
     @Transactional
     public void save(String institutionName) {
-        Institution institution = Institution.of(institutionName);
+        Institution institution = Institution.from(institutionName);
         institutionRepository.save(institution);
     }
 

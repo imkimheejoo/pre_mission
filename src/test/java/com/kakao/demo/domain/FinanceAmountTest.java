@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FinanceAmountTest {
     private FinanceDate date = FinanceDate.of(2005, 1);
-    private Institution institution = Institution.of("국민은행");
+    private Institution institution = Institution.from("국민은행");
 
     @Test
     @DisplayName("FinanceAmount 객체 생성 테스트")
